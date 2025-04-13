@@ -8,21 +8,36 @@ public class Vektor {
     public static double ursprung = 0;
 
     public Vektor (double a, double b){
-
+        this.x = a;
+        this.y = b;
+    }
+    public Vektor (double a, double b, double c, double d){
+        this.x = a;
+        this.y = b;
+        this.lenge = c;
+        this.winkel = d;
     }
 
-    public Vektor ausKoordinate(double x, double y){
-        this.x = x;
-        this.y = y;
+    public static Vektor ausKoordinate(double x, double y){
         return new Vektor(x, y);
     }
-    public Vektor ausLengeWinkel(double lenge, double winkel){
-        this.lenge = lenge;
-        this.winkel = winkel;
-        this.x = lenge * Math.cos(winkel);
-        this.y = lenge * Math.sin(winkel);
+    public static Vektor ausLengeWinkel(double lenge, double winkel){
+        return new Vektor(lenge * Math.cos(winkel)  , lenge * Math.sin(winkel), lenge, winkel);
+    }
 
-        return new Vektor(x, y);
+    public Vektor addieren(Vektor v){
+        double a = this.x + v.x;
+        double b = this.y + v.y;
+        return new Vektor(a, b);
+    }
+    public double skalarprodukt(Vektor v){
+        return  ((this.x * v.x) + (this.y * v.y));
+    }
+
+    public Vektor inverserVektor(){
+        return new Vektor(-this.x, -this.y);
+    }
+    public Vektor orthogonalerEinheitsvektor(){
 
     }
 }
