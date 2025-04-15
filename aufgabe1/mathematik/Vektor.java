@@ -1,5 +1,7 @@
 package mathematik;
 
+import java.util.Vector;
+
 public class Vektor {
     public double x;
     public double y;
@@ -10,6 +12,8 @@ public class Vektor {
     public Vektor (double a, double b){
         this.x = a;
         this.y = b;
+        this.lenge=Math.sqrt((x*x)+(y*y));
+        this.winkel=Math.toDegrees(Math.atan2(y, x));
     }
     public Vektor (double a, double b, double c, double d){
         this.x = a;
@@ -18,9 +22,6 @@ public class Vektor {
         this.winkel = d;
     }
 
-    public static Vektor ausKoordinate(double x, double y){
-        return new Vektor(x, y);
-    }
     public static Vektor ausLengeWinkel(double lenge, double winkel){
         return new Vektor(lenge * Math.cos(winkel)  , lenge * Math.sin(winkel), lenge, winkel);
     }
@@ -38,6 +39,10 @@ public class Vektor {
         return new Vektor(-this.x, -this.y);
     }
     public Vektor orthogonalerEinheitsvektor(){
-
+        double normierer = 1/(Math.sqrt(Math.pow(x, 2)+Math.pow(y, 2)));
+        return (new Vektor(-y*normierer, x*normierer));
+    }
+    public String toString(){
+        return "< " + String.valueOf(this.x)+" | "+String.valueOf(this.y) + " >";
     }
 }
