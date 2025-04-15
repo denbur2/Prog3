@@ -1,5 +1,7 @@
 package bankprojekt.verarbeitung;
 
+import bankprojekt.geld.Waehrung;
+
 /**
  * Ein Geldbetrag mit Währung
  */
@@ -11,7 +13,7 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	/**
 	 * Die Währung
 	 */
-	private String waehrung = "€";
+	private Waehrung waehrung = Waehrung.EUR;
 	
 	/**
 	 * 0 €
