@@ -6,12 +6,14 @@ public enum Waehrung {
     DOBRA(24304.7429),
     FRANC(490.92);
 
-    private final double kursVonEUR;
-
-    Waehrung(double kursVonEUR) {
-        this.kursVonEUR = kursVonEUR;
+    private final double kurs;
+    Waehrung(double kurs) {
+        this.kurs = kurs;
     }
     public double inEUR(double a){
-        return a/kursVonEUR;
+        return a/ kurs;
+    }
+    public double EURZuThis(double a){
+        return a*kurs;
     }
 }

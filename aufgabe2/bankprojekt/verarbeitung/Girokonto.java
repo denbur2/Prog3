@@ -1,5 +1,7 @@
 package bankprojekt.verarbeitung;
 
+import bankprojekt.geld.*;
+
 /**
  * Ein Girokonto, d.h. ein Konto mit einem Dispo und der Fähigkeit,
  * Überweisungen zu senden und zu empfangen.
@@ -21,7 +23,7 @@ public class Girokonto extends UeberweisungsfaehigesKonto{
 	public Girokonto()
 	{
 		super(Kunde.MUSTERMANN, 99887766);
-		this.dispo = new Geldbetrag(500);
+		this.dispo = new Geldbetrag(500, Waehrung.EUR);
 	}
 	
 	/**
@@ -56,6 +58,11 @@ public class Girokonto extends UeberweisungsfaehigesKonto{
 		if(dispo == null || dispo.isNegativ())
 			throw new IllegalArgumentException("Der Dispo ist nicht gültig!");
 		this.dispo = dispo;
+	}
+	@Override
+	public void waehrungswechsel(Waehrung neu){
+		super.waehrungswechsel(neu);
+		this.dispo.umrechnen(neu);
 	}
 	
 	@Override

@@ -10,6 +10,7 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	 * Betrag in der in waehrung angegebenen Währung
 	 */
 	private double betrag;
+	private double BetragInEUR;
 	/**
 	 * Die Währung
 	 */
@@ -31,6 +32,20 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 		if(!Double.isFinite(betrag))
 			throw new IllegalArgumentException();
 		this.betrag = betrag;
+	}
+
+	public Geldbetrag(double betrag, Waehrung w){
+		if(!Double.isFinite(betrag))
+			throw new IllegalArgumentException();
+		this.betrag = betrag;
+		this.BetragInEUR = w.inEUR(betrag);
+		this.waehrung = w;
+	}
+
+	public Geldbetrag umrechnen(Waehrung zielwaehrung){
+		this.betrag = zielwaehrung.EURZuThis(this.BetragInEUR);
+		this.waehrung = zielwaehrung;
+		return this;
 	}
 
 	/**
@@ -105,6 +120,6 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	@Override
 	public String toString()
 	{
-		return String.format("%,.2f €", this.betrag);
+		return String.format("%1$,.2f %2$s", this.betrag, this.waehrung);
 	}
 }

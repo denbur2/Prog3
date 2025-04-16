@@ -1,5 +1,7 @@
 package bankprojekt.verarbeitung;
 
+import bankprojekt.geld.Waehrung;
+
 /**
  * stellt ein allgemeines Bank-Konto dar
  */
@@ -28,6 +30,8 @@ public abstract class Konto implements Comparable<Konto>
 	 * setzt den aktuellen Kontostand
 	 * @param kontostand neuer Kontostand, darf nicht null sein
 	 */
+
+
 	protected void setKontostand(Geldbetrag kontostand) {
 		if(kontostand != null)
 			this.kontostand = kontostand;
@@ -193,6 +197,13 @@ public abstract class Konto implements Comparable<Konto>
 	 * @param other das Vergleichskonto
 	 * @return true, wenn beide Konten die gleiche Nummer haben
 	 */
+
+
+	public void waehrungswechsel(Waehrung neu){
+		this.kontostand.umrechnen(neu);
+	}
+
+
 	@Override
 	public boolean equals(Object other)
 	{
