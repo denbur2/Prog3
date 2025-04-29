@@ -20,8 +20,10 @@ public class main {
         LocalDate datum = LocalDate.of(2002, 2, 23);
         Kunde Hendrik = new Kunde("Hendrik", "Armbrecht", "Schloss NeuSchwarnStein", datum);
 
-        Geldbetrag VielGelt = new Geldbetrag(100000, Waehrung.EUR);
-        Girokonto kontox = new Girokonto(Hendrik, 69420, VielGelt);
+        Geldbetrag Vielgelt = new Geldbetrag(100000, Waehrung.EUR);
+        Girokonto kontox = new Girokonto(Hendrik, 69420, Vielgelt);
+
+        System.out.println(Vielgelt);
 
         kontox.waehrungswechsel(Waehrung.ESCUDO);
         System.out.println(kontox.getDispo());
