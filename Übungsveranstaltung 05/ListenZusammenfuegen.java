@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.time.LocalDate;
@@ -16,9 +17,14 @@ public class ListenZusammenfuegen {
 	 * @param l2 zweite Liste
 	 * @return die neue gemeinsame Liste aus l1 und l2
 	 */
-	public static List zusammenfuegen(List l1, List l2)
+	public static <A>
+	List<A> zusammenfuegen(List<? extends A> l1, List<? extends A> l2)
 	{
-		
+		List<A> zusammen = new ArrayList<>(l1);
+		zusammen.addAll(l2);
+
+
+		return zusammen;
 	}
 
 	/**
@@ -45,9 +51,13 @@ public class ListenZusammenfuegen {
 		List<Number> zusammen;
 		zusammen = zusammenfuegen(ganzeZahlen, kommaZahlen);
 
+		System.out.println(zusammen);
+
 		//Das sollte nicht gehen:
 		//List<String> z1 = zusammenfuegen(ganzeZahlen, kommaZahlen);
 		//List<Integer> z2 = zusammenfuegen(ganzeZahlen, kommaZahlen);
 		//List<Double> z3 = zusammenfuegen(ganzeZahlen, kommaZahlen);
+
+		//System.out.println(z1);
 	}
 }

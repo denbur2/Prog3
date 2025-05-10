@@ -1,0 +1,19 @@
+In der Klasse Mockito gibt es diese Methoden:
+- public static <X> X mock(Class<X> classToMock) 
+- public static <Y> OngoingStubbing<Y> when(Y methodCall);
+
+Und im Interface OngoingStubbing<T> diese:
+- public <M> M getMock();
+- public OngoingStubbing<T> thenThrow(Class<? extends Throwable> typ);
+
+
+In einem Ihrer Tests steht folgender Code:
+
+Konto testkonto =  Mockito.when(Mockito.mock(Girokonto.class).abheben(100))
+			.thenThrow(GesperrtException.class)
+			.getMock();
+
+Welche Datentypen hat der Compiler hier für die Typparameter X, Y, M, T und die Wildcard (das Fragezeichen) 
+eingesetzt?
+Hinweis: die Signatur der Methode abheben sollten Sie aus der Vorlesung kennen: 
+public boolean abheben(double betrag) throws GesperrtException
