@@ -1,3 +1,8 @@
 {
+<<<<<<< HEAD
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "workbench.editor.highlightModifiedTabs": false
+=======
     "java.configuration.updateBuildConfiguration": "interactive"
+>>>>>>> cc3c7c5b20d832b9d095068bb2c2571cae459bcb
 }

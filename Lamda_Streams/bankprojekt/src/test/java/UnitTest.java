@@ -1,19 +1,32 @@
-import bankprojekt.verarbeitung.*;
-import bankprojekt.verwaltung.Bank;
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
     
+=======
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import bankprojekt.verarbeitung.Geldbetrag;
+import bankprojekt.verarbeitung.GesperrtException;
+import bankprojekt.verarbeitung.Kunde;
+import bankprojekt.verarbeitung.UeberweisungsfaehigesKonto;
+import bankprojekt.verwaltung.Bank;
+
+>>>>>>> 58b4eb6a871a66f55b7738ea7a35f21ccc6cd411
 public class UnitTest {
     Bank bank = new Bank(12345678);
     Kunde kunde = new Kunde("Max", "Mustermann", "Musterstraße 1", LocalDate.of(1990, 5, 15));
     Kunde kunde2 = new Kunde("Lilly", "Musterfrau", "Musterstraße 2", LocalDate.of(1991, 6, 14));
     long kontoNr1 = bank.girokontoErstellen(kunde);
     long kontoNr2 = bank.girokontoErstellen(kunde2);
-
 
     @Test
     void testGeldUeberweisen() throws GesperrtException {
