@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
+    
 public class UnitTest {
     Bank bank = new Bank(12345678);
     Kunde kunde = new Kunde("Max", "Mustermann", "Musterstraße 1", LocalDate.of(1990, 5, 15));
