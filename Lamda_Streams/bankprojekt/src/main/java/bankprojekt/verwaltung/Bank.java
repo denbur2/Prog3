@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import bankprojekt.verarbeitung.Geldbetrag;
 import bankprojekt.verarbeitung.GesperrtException;
@@ -34,19 +35,16 @@ public class Bank {
                 .forEach(konto -> konto.einzahlen(betrag));
     }
     public List<Kunde> getKundenMitLeeremKonto() {
-        List<Kunde> kunden = new ArrayList<>();
-        for (Map.Entry<Long, Konto> eintrag : konten.entrySet()) {
-            if (eintrag.getValue().getKontostand().equals(Geldbetrag.NULL_EURO)) {
-                kunden.add(eintrag.getValue().getInhaber());
-            }
-        }
-        return kunden;
+        return konten.values().stream()
+                .filter(konto -> konto.getKontostand().equals(Geldbetrag.NULL_EURO))
+                .map(Konto::getInhaber)
+                .collect(Collectors.toList());
     }
     public String getKundengeburtstage() {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<Long, Konto> eintrag : konten.entrySet()) {
-            sb.append(eintrag.getValue().getInhaber().getName()).append(": ").append(eintrag.getValue().getInhaber().getGeburtsdatum()).append("\n");
-        }
+        konten.values().stream()
+                .map(konto -> konto.getInhaber().getName() + ": " + konto.getInhaber().getGeburtsdatum() + "\n")
+                .forEach(sb::append);
         return sb.toString();
     }
     public long getAnzahlSenioren() {
@@ -54,14 +52,11 @@ public class Bank {
                 .filter(konto -> konto.getInhaber().getAlter() >= 65)
                 .count();
     }
-    public List<Kunde> getAlleArmenKunden(Geldbetrag maxium){
-        List<Kunde> armeKunden = new ArrayList<>();
-        for (Map.Entry<Long, Konto> eintrag : konten.entrySet()) {
-            if (eintrag.getValue().getKontostand().compareTo(maxium) < 0) {
-                armeKunden.add(eintrag.getValue().getInhaber());
-            }
-        }
-        return armeKunden;
+    public List<Kunde> getAlleArmenKunden(Geldbetrag maximum) {
+        return konten.values().stream()
+                .filter(konto -> konto.getKontostand().compareTo(maximum) < 0)
+                .map(Konto::getInhaber)
+                .collect(Collectors.toList());
     }
 
 
