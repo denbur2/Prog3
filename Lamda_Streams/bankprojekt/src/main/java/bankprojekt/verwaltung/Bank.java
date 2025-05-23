@@ -1,16 +1,22 @@
 package bankprojekt.verwaltung;
-import bankprojekt.verarbeitung.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import bankprojekt.verarbeitung.Geldbetrag;
+import bankprojekt.verarbeitung.GesperrtException;
+import bankprojekt.verarbeitung.Girokonto;
+import bankprojekt.verarbeitung.Konto;
+import bankprojekt.verarbeitung.Kunde;
+import bankprojekt.verarbeitung.Sparbuch;
+import bankprojekt.verarbeitung.UeberweisungsfaehigesKonto;
+
 
 public class Bank {
     private final long bankleitzahl;
     private long naechsteKontonummer = 1;
-    private Map<Long, Konto> konten = new HashMap<>();
+    private final Map<Long, Konto> konten = new HashMap<>();
 
     public Bank(long bankleitzahl) {
         this.bankleitzahl = bankleitzahl;
@@ -21,6 +27,45 @@ public class Bank {
         konten.put(nummer, k);
         return nummer;
     }
+
+    public void schenkungAnNeuerwachsene(Geldbetrag betrag) {
+        konten.values().stream()
+                .filter(konto -> konto.getInhaber().getAlter() >= 18)
+                .forEach(konto -> konto.einzahlen(betrag));
+    }
+    public List<Kunde> getKundenMitLeeremKonto() {
+        List<Kunde> kunden = new ArrayList<>();
+        for (Map.Entry<Long, Konto> eintrag : konten.entrySet()) {
+            if (eintrag.getValue().getKontostand().equals(Geldbetrag.NULL_EURO)) {
+                kunden.add(eintrag.getValue().getInhaber());
+            }
+        }
+        return kunden;
+    }
+    public String getKundengeburtstage() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<Long, Konto> eintrag : konten.entrySet()) {
+            sb.append(eintrag.getValue().getInhaber().getName()).append(": ").append(eintrag.getValue().getInhaber().getGeburtsdatum()).append("\n");
+        }
+        return sb.toString();
+    }
+    public long getAnzahlSenioren() {
+        return (int) konten.values().stream()
+                .filter(konto -> konto.getInhaber().getAlter() >= 65)
+                .count();
+    }
+    public List<Kunde> getAlleArmenKunden(Geldbetrag maxium){
+        List<Kunde> armeKunden = new ArrayList<>();
+        for (Map.Entry<Long, Konto> eintrag : konten.entrySet()) {
+            if (eintrag.getValue().getKontostand().compareTo(maxium) < 0) {
+                armeKunden.add(eintrag.getValue().getInhaber());
+            }
+        }
+        return armeKunden;
+    }
+
+
+
 
     public long getBankleitzahl() {
         return bankleitzahl;

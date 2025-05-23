@@ -157,6 +157,13 @@ public class Kunde implements Comparable<Kunde>{
 	public String getNachname() {
 		return nachname;
 	}
+	public int getAlter() {
+		return LocalDate.now().getYear() - geburtstag.getYear();
+	}
+	public String getGeburtsdatum() {
+		DateTimeFormatter df = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
+		return df.format(this.geburtstag);
+	}
 
 	/**
 	 * setzt den Nachnamen auf den angegebenen Wert

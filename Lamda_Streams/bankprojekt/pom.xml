@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.htw-berlin</groupId>
-  <artifactId>Bankprojekt</artifactId>
+  <artifactId>bankprojekt</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>Bankprojekt</name>
+  <name>bankprojekt</name>
   <url>http://maven.apache.org</url>
 
   <properties>
