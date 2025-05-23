@@ -73,7 +73,7 @@ public class Girokonto extends UeberweisungsfaehigesKonto{
     {
       if (this.isGesperrt())
             throw new GesperrtException(this.getKontonummer());
-        if (betrag == null || betrag.isNegativ()|| empfaenger == null || verwendungszweck == null)
+        if (betrag == null || betrag.isNegativ() || empfaenger == null || verwendungszweck == null)
             throw new IllegalArgumentException("Parameter fehlerhaft");
         if (!getKontostand().plus(dispo).minus(betrag).isNegativ())
         {

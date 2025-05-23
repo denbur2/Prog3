@@ -88,7 +88,7 @@ public class Kunde implements Comparable<Kunde>{
 	{
 		@Override
 		public void run() {
-			System.out.println("Kunde " + Kunde.this.getName() + " zerstört");
+			//System.out.println("Kunde " + Kunde.this.getName() + " zerstört");
 		}
 	}
 

@@ -34,7 +34,6 @@ public abstract class Konto implements Comparable<Konto>
 
 	protected void setKontostand(Geldbetrag kontostand) {
 		if(kontostand != null)
-			System.out.println(kontostand.getBetrag());
 			this.kontostand = kontostand;
 	}
 

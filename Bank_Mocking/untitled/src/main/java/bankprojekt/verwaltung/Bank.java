@@ -16,6 +16,12 @@ public class Bank {
         this.bankleitzahl = bankleitzahl;
     }
 
+    public long mockEinfuegen(Konto k){
+        long nummer = naechsteKontonummer++;
+        konten.put(nummer, k);
+        return nummer;
+    }
+
     public long getBankleitzahl() {
         return bankleitzahl;
     }
@@ -83,7 +89,6 @@ public class Bank {
         if (von instanceof UeberweisungsfaehigesKonto && nach instanceof UeberweisungsfaehigesKonto) {
             UeberweisungsfaehigesKonto sender = (UeberweisungsfaehigesKonto) von;
             UeberweisungsfaehigesKonto empfaenger = (UeberweisungsfaehigesKonto) nach;
-
             try {
                 boolean erfolgreich = sender.ueberweisungAbsenden(
                         betrag,
@@ -104,11 +109,20 @@ public class Bank {
                     return true;
                 }
             } catch (GesperrtException e) {
+
                 // Konto ist gesperrt → Überweisung gescheitert
+            } catch (IllegalArgumentException e){
+                return false;
             }
         }
 
         return false;
+    }
+    public void kontoSperren(long kontoNr){
+        konten.get(kontoNr).sperren();
+    }
+    public void kontoEntsperren(long kontoNr){
+        konten.get(kontoNr).entsperren();
     }
 
 }

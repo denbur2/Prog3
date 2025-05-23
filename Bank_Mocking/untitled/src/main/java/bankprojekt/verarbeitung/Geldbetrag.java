@@ -67,8 +67,8 @@ public class Geldbetrag implements Comparable<Geldbetrag>{
 	{
 		if(summand == null)
 			throw new IllegalArgumentException();
-		System.out.println(this.betragInEUR + " + " + summand.betragInEUR);
-		System.out.println(this.betrag + " + " + summand.betrag);
+		//System.out.println(this.betragInEUR + " + " + summand.betragInEUR);
+		//System.out.println(this.betrag + " + " + summand.betrag);
 
 		return new Geldbetrag(this.betragInEUR + summand.betragInEUR).umrechnen(this.waehrung);
 	}
